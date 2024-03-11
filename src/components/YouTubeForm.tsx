@@ -35,6 +35,7 @@ export default function YouTubeForm() {
       age: 0,
       dob: new Date(),
     },
+    mode: "onBlur",
   });
 
   // const form = useForm<FormValues>({
@@ -60,6 +61,7 @@ export default function YouTubeForm() {
     getValues,
     setValue,
     reset,
+    trigger,
   } = form;
 
   const {
@@ -294,6 +296,10 @@ export default function YouTubeForm() {
 
         <button type="button" onClick={handleSetValue}>
           Set Value
+        </button>
+
+        <button type="button" onClick={() => trigger("channel")}>
+          Validate
         </button>
       </form>
       <DevTool control={control} />
