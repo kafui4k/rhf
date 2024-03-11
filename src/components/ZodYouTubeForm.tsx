@@ -30,7 +30,7 @@ export default function ZodYouTubeForm() {
 
   const { register, control, handleSubmit, formState } = form;
 
-  const { errors, isDirty, isValid, isSubmitting } = formState;
+  const { errors, isSubmitting } = formState;
 
   const onSubmit = (data: FormValues) => {
     console.log("Form Submitted", data);
