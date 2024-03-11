@@ -59,6 +59,7 @@ export default function YouTubeForm() {
     watch,
     getValues,
     setValue,
+    reset,
   } = form;
 
   const {
@@ -102,11 +103,17 @@ export default function YouTubeForm() {
   };
 
   useEffect(() => {
-    const subscription = watch((value) => {
-      console.log(value);
-    });
-    return () => subscription.unsubscribe();
-  }, [watch]);
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
+
+  // useEffect(() => {
+  //   const subscription = watch((value) => {
+  //     console.log(value);
+  //   });
+  //   return () => subscription.unsubscribe();
+  // }, [watch]);
 
   const watchUsername = watch("username");
 
@@ -270,9 +277,14 @@ export default function YouTubeForm() {
           {isSubmitting ? "submitting..." : "Submit"}
         </button>
 
+        <button type="button" onClick={() => reset()}>
+          Reset
+        </button>
+
         <button type="button" onClick={handleGetValues}>
           Get Values
         </button>
+
         <button type="button" onClick={handleSetValue}>
           Set Value
         </button>
