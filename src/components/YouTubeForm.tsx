@@ -1,8 +1,19 @@
 import { useForm, useFieldArray, FieldErrors } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { useEffect } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 let renderCount = 0;
+
+const schema = yup.object({
+  username: yup.string().required("Username is required"),
+  email: yup
+    .string()
+    .email("Email format is not valid")
+    .required("Email is required"),
+  channel: yup.string().required("Channel is required"),
+});
 
 type FormValues = {
   username: string;
@@ -36,6 +47,7 @@ export default function YouTubeForm() {
       dob: new Date(),
     },
     mode: "onBlur",
+    // resolver: yupResolver(schema),
   });
 
   // const form = useForm<FormValues>({
