@@ -60,7 +60,10 @@ export default function YouTubeForm() {
     getValues,
     setValue,
   } = form;
-  const { errors } = formState;
+
+  const { errors, touchedFields, dirtyFields } = formState;
+
+  console.log({ touchedFields, dirtyFields });
 
   const { fields, append, remove } = useFieldArray({
     name: "phNumbers",
@@ -191,7 +194,14 @@ export default function YouTubeForm() {
 
         <div className="form-control">
           <label htmlFor="twitter">Twitter</label>
-          <input type="text" id="twitter" {...register("social.twitter")} />
+          <input
+            type="text"
+            id="twitter"
+            {...register("social.twitter", {
+              disabled: watch("channel") === "",
+              required: "Enter your Twitter handle",
+            })}
+          />
         </div>
 
         <div className="form-control">
